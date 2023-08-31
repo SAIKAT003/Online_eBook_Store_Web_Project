@@ -1,0 +1,24 @@
+{% extends 'adminbase.html'%}
+{%block items %}
+<p><h1 style="text-align: center;">Customers Data</h1></p>
+<table class="table">
+    <thead>
+     <tr>
+        <th>Sno.</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Password</th>
+     </tr>
+      {%for user in user%}
+      <tr>
+        <td>{{forloop.counter}}</td>
+        <td>{{user.name}}</td>
+        <td>{{user.email}}</td>
+        <td>{{user.pwd}}</td>
+        <td>
+        </td>
+        </tr>
+      {%endfor%}
+    </tbody>
+  </table> 
+  {% endblock %}

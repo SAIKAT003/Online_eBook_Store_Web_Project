@@ -1,0 +1,29 @@
+{% extends 'base2.html' %}
+{% block items%}
+{% load cart %}
+{%  load custom_filter %}
+    <div class="container-fluid mt-5 sm:10x ">
+        <div class="row mx-auto">
+        {%for Books in Books%}
+    <div class="mx-auto  mt-3" id={{Books.id}} style="width: 13rem;">
+        <div class="card h-100">
+            <img class="card-img-top" src="{{Books.image.url}}" alt="error">
+            <div class="card-body">
+                <h5 class="card-title">{{Books.name}}</h5>
+                <p class="card-text">{{Books.price|currency}}</p>
+                <!-- <small>{{Books.image.url}}</small> -->
+                <p class="card-text">{{Books.description}}</p>
+                <br>
+                <!-- {{Books | is_in_cart:request.session.cart }} -->
+                <form action="/home#{{Books.id}}" method="POST" class="btn-block">
+                    {% csrf_token %}
+                    <input hidden type="text" name="books"value='{{Books.id}}'>
+                    <input href="#" type="submit"class=" btn btn-light border" style="position:absolute; bottom: 2px;float: right;" value="Add to Cart">
+                </form>
+            </div>
+        </div>
+    </div>
+    {%endfor%}
+</div>
+</div>
+{% endblock%} 

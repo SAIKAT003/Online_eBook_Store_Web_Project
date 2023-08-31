@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block items%}
+<div class="container-fluid mt-4">
+    <div class="row mx-auto">
+        {%for Books in Books%}
+    <div class="mx-auto" style="width: 18rem;">
+        <img class="card-img-top" src="{{Books.image.url}}" alt="bal bal">
+        <div class="card-body">
+            <h5 class="card-title">{{Books.name}}</h5>
+            <p class="card-text">{{Books.price}}</p>
+            <!-- <small>{{Books.image.url}}</small> -->
+            <p class="card-text">{{Books.description}}</p>
+            <a href="#" class="btn btn-primary border btn-sm">Add to Cart</a>
+        </div>
+    </div>
+    {%endfor%}
+</div>
+</div>
+{% endblock%}

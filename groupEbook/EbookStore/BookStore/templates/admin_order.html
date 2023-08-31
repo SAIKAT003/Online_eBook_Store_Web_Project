@@ -1,0 +1,31 @@
+{% extends 'adminbase.html'%}
+{%block items%}
+{% load cart %}
+{% load custom_filter %}
+<p><h1 style="text-align:center">Order Details</h1></p>
+<table class="table">
+    <thead>
+     <tr>
+        <th>Sno.</th>
+        <th></th>
+        <th>Book</th>
+        <th>Date</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Customer</th>
+        <th>Total</th>
+     </tr>
+      {%for order in orders%}
+     <tr>
+        <td>{{forloop.counter}}</td>
+        <td><img style="height: 100px;" class="" src="{{order.Book.image.url}}" alt=""></td>
+        <td>{{order.Book.name}}</td>
+        <td>{{order.date}}</td>
+        <td>{{order.price|currency}}</td>
+        <td>{{order.quantity}}</td>
+        <td>{{order.customer}}</td>
+        <td>{{order.quantity|multiply:order.price|currency}}</td>
+     </tr>
+      {%endfor%}
+    </tbody>
+{% endblock %}

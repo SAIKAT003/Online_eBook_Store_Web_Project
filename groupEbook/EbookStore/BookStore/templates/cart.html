@@ -1,0 +1,82 @@
+{% extends 'base2.html' %}
+{% block items %}
+{% load cart %}
+{% load custom_filter %}
+<div class="container">
+    <div class="border rounder p-4 m-4" style="background-color: white; border-radius: 20px;">
+      <p class="display-3 p-l"> Your Books</p>
+      <hr>
+        <table class="table">
+            <thead>
+             <tr>
+                <th>Sno.</th>
+                <th></th>
+                <th>Book</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+             </tr>
+              {%for Books in books%}
+              <tr>
+                <td>{{forloop.counter}}</td>
+                <td><img style="height: 100px;" class="" src="{{Books.image.url}}" alt=""></td>
+                <td>{{Books.name}}</td>
+                <td>{{Books.price|currency}}</td>
+                <td>
+                  <div class="row" style="width: fit-content;" >
+                    
+                    <form action="/cart#{{Books.id}}"  class="btn-sm" method="POST" style="width: fit-content;">
+                      {% csrf_token %}
+                      <input hidden type="text" name="books"value='{{Books.id}}'>
+                      <input hidden type="text" name="remove"value='True'>
+                      <input type="submit" value=" - " class=" btn btn-secondary btn-sm">
+                    </form>
+
+                    <div class="" style="width: fit-content; padding:10px;">{{Books|cart_quantity:request.session.cart}}</div>
+
+                    <form action="/cart#{{Books.id}}"  class="btn-sm" method="POST" style="width: fit-content;">
+                        {% csrf_token %}
+                        <input hidden type="text" name="books"value='{{Books.id}}'>
+                        <input href="#" type="submit"class="btn btn btn-secondary btn-sm"value="+">
+                      </form>
+                    </div>
+                  </td>
+                  <td>{{Books|price_total:request.session.cart|currency}}</td>
+              </tr>
+              {%endfor%}
+     
+            </tbody>
+            <tfoot>
+              <tr>
+                <th colspan="5">Total</th>
+                <th>{{books|total_cart_price:request.session.cart|currency}}</th>
+              </tr>
+            </tfoot>
+          </table> 
+          <div class="m-3 p-3">
+           <a href="/cart" data-bs-toggle="modal" data-bs-target="#exampleModal" method="POST" class="btn btn-success border rounded col lg-3 " style="float: right;"> 
+            {% csrf_token %}Check out</a>
+          </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Confirm Order</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <form action='/check-out' method="post">
+            {% csrf_token %}  
+            <input type="submit" class="btn btn-primary float-right" value="Check Out">
+          </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+

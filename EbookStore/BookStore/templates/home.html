@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>eBook Store</title>
+  <!-- Add Bootstrap CSS link here -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">eBook Store</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Books</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Contact</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <!-- "https://live.staticflickr.com/8078/8314929977_28fd740070_b.jpg" -->
+  <!-- "https://notionpress.com/blog/wp-content/uploads/2015/07/20140327052311-books-770x366.jpg"  -->
+  <!-- Hero Section -->
+  <section class="jumbotron text-center">
+    <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="https://live.staticflickr.com/8078/8314929977_28fd740070_b.jpg" class="d-block w-100" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img src="https://notionpress.com/blog/wp-content/uploads/2015/07/20140327052311-books-770x366.jpg" class="d-block w-100" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img src="..." class="d-block w-100" alt="...">
+          </div>
+        </div>
+      </div>
+  </section>
+
+  <!-- Featured eBooks Section -->
+  <section class="container my-5">
+    <div class="container-fluid mt-4">
+        <div class="row mx-auto">
+            {%for Books in Books%}
+        <div class="mx-auto" style="width: 18rem;">
+            <img class="card-img-top" src="{{Books.image.url}}" alt="bal bal">
+            <div class="card-body">
+                <h5 class="card-title">{{Books.name}}</h5>
+                <p class="card-text">{{Books.price}}</p>
+                <!-- <small>{{Books.image.url}}</small> -->
+                <p class="card-text">{{Books.description}}</p>
+                <a href="#" class="btn btn-primary border btn-sm">Add to Cart</a>
+            </div>
+        </div>
+        {%endfor%}
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white text-center py-3">
+    <p>&copy; 2023 eBook Store. All rights reserved.</p>
+  </footer>
+
+  <!-- Add Bootstrap JS scripts here -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

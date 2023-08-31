@@ -1,0 +1,27 @@
+{% extends 'adminbase.html'%}
+{% load cart %}
+{% load custom_filter %}
+{% block items %}
+
+    <div class="form" style="width: 80%; border: 2px solid purple; margin: 5% auto 15% auto; ">
+        <form action="../edcode/{{a.id}}">
+      <div class="form-group">
+          <label for="">Book Name:</label>
+          <input type="text" placeholder="Book Name" class="form-control"  name="name" value="{{a.name}}"> <br>
+        </div>
+      <div class="form-group">
+          <label for="">Book Price:</label>
+          <input type="number" placeholder="Book Price" class="form-control"  name="price" value="{{a.price}}"> <br>
+        </div>
+        <div class="form-group">
+            <label for="">Book Description:</label>
+            <input type="text" placeholder="Book Description" class="form-control"  name="description"value="{{a.description}}" > <br>
+        </div>
+        <div class="form-group">
+            <label for="">Book image:</label>
+            <input type="file" placeholder="Book image" class="form-control" name="image" value="{{a.image}}"> <br>
+        </div>
+        <input type="submit" class="btn btn-primary float-right" style="font-size: right;">
+    </form>
+</div>
+{% endblock %}

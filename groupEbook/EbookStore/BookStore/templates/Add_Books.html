@@ -1,0 +1,80 @@
+{% extends 'adminbase.html'%}
+{% load cart %}
+{% load custom_filter %}
+{% block items %}
+
+<div class="m-3 p-3">
+    <a href="/Add_Books" data-bs-toggle="modal" data-bs-target="#exampleModal" method="POST" class="btn btn-success border rounded col lg-3 " style="float: right;"> 
+     {% csrf_token %}+Add</a>
+   </div>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Add Book Details</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form action='/Add_Books' method="post">
+              {% csrf_token %} 
+              <div class="form-group">
+                  <label for="">Book Name:</label>
+                  <input type="text" placeholder="Book Name" class="form-control" aria-describedby="helpId" name="B_name"> <br>
+                </div>
+              <div class="form-group">
+                  <label for="">Book Price:</label>
+                  <input type="number" placeholder="Book Price" class="form-control" aria-describedby="helpId" name="B_price"> <br>
+                </div>
+              <div class="form-group">
+                  <label for="">Book Description:</label>
+                  <input type="text" placeholder="Book Description" class="form-control" aria-describedby="helpId" name="B_Desc"> <br>
+                </div>
+              <div class="form-group">
+                  <label for="">Book image:</label>
+                  <input type="file" placeholder="Book image" class="form-control" name="B_img"> <br>
+                </div>
+              <input type="submit" class="btn btn-primary float-right" value="Add">
+            </form>
+        </div>
+      </div>
+    </div>
+</div>
+
+<p><h1 style="text-align:center">Books Details</h1></p>
+<table class="table">
+    <thead>
+     <tr>
+        <th>Sno.</th>
+        <th></th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Description</th>
+        <th>   </th>
+        <th>   </th>
+        <th>   </th>
+     </tr>
+  {%for Books in Books%}
+    <tr>
+        <td>{{forloop.counter}}</td>
+        <td><img style="height: 100px;" src="{{Books.image.url}}" alt="error"></td>
+        <td>{{Books.name}}</td>
+        <td>{{Books.price|currency}}</td>
+        <td>{{Books.description}}</td>
+        <td>
+          <form action="/Add_Books#{{Books.id}}">
+          <td><a href="del/{{Books.id}}" class="btn btn-danger">Delete</a></td>
+        </form>
+      </td>
+
+
+      <td>
+        <div class="m-3 p-3">
+          <a href="edit/{{Books.id}}"class="btn btn-primary border rounded col lg-3 " style="float: right;">Edit</a>
+         </div>
+      </td>
+    </tr>
+    {%endfor%}
+  </thead>
+</table>
+
+{% endblock %}
